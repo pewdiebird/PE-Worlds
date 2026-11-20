@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f0e9">
+  <title>Worlds</title>
+  <script src="theme.js"></script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%235b773d' d='M4 4h24v24H4z'/%3E%3Cpath fill='%238ba85a' d='M4 4h24v8H4z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="worlds.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page-scroll">
+    <header class="bar">
+      <div class="brand">
+        <a class="wordmark" href="index.html">Worlds</a>
+        <button id="about-open" class="icon-button" aria-label="About these worlds" aria-haspopup="dialog" title="About these worlds"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".8" fill="currentColor" stroke="none"/></svg></button>
+        <span id="count">26</span>
+      </div>
+      <div class="bar-actions">
+        <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        <input id="search" type="search" placeholder="Find a world" aria-label="Find a world by name or number" autocomplete="off">
+        </label>
+        <button class="icon-button theme-toggle" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+      </div>
+    </header>
+    <main>
+      <div id="gallery" class="gallery" aria-label="Selected Minecraft worlds"></div>
+      <p id="empty" hidden>No worlds found.</p>
+    </main>
+  </div>
+  <dialog id="about" class="about-dialog" aria-labelledby="about-title">
+    <div class="about-heading">
+      <h1 id="about-title">About these worlds</h1>
+      <button id="about-close" class="icon-button" aria-label="Close about" title="Close (Esc)" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <p>These are my old Minecraft Pocket Edition worlds, pulled off my Samsung Captivate. Most are from 2011–2012, and the last time any of them got played was 2014.</p>
+    <p>I dug them back up for the channel’s 20th anniversary video. Download any of them and do whatever you want with them.</p>
+    <div class="about-downloads">
+      <p>Works in the latest version of <strong>Minecraft Java Edition</strong>. Unzip a world and drop the folder into your <code>saves</code> folder.</p>
+    </div>
+  </dialog>
+  <dialog id="viewer" aria-labelledby="world-name">
+    <div class="viewer-bar">
+      <button class="icon-button theme-toggle" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+      <div class="viewer-title"><span id="world-id"></span><h1 id="world-name"></h1></div>
+      <button id="close" class="icon-button" aria-label="Close viewer" title="Close (Esc)" autofocus><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div id="stage" class="stage">
+      <img id="full-image" alt="" draggable="false">
+      <button id="previous" class="icon-button step previous" aria-label="Previous world" title="Previous world (Left arrow)"><svg viewBox="0 0 24 24"><path d="m14 5-7 7 7 7"/></svg></button>
+      <button id="next" class="icon-button step next" aria-label="Next world" title="Next world (Right arrow)"><svg viewBox="0 0 24 24"><path d="m10 5 7 7-7 7"/></svg></button>
+    </div>
+    <div class="viewer-footer">
+      <div id="views" class="view-tabs" aria-label="View">
+        <button data-view="map" aria-pressed="true">Map</button>
+        <button data-view="overhead" aria-pressed="false">Overhead</button>
+        <button data-view="angled" aria-pressed="false">Angled</button>
+      </div>
+      <div class="image-controls">
+        <button id="zoom-out" class="icon-button" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+        <button id="fit" title="Fit image">Fit</button>
+        <button id="zoom-in" class="icon-button" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></button>
+      </div>
+        <a id="download" class="download-world" download title="Unzip into your Minecraft Java Edition saves folder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg><span>Download world</span></a>
+    </div>
+  </dialog>
+</body>
+</html>
